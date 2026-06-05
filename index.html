@@ -104,6 +104,16 @@ h2,h3{font-family:"Outfit",sans-serif;margin:0;letter-spacing:-.02em;line-height
 .nav-link:hover{background:rgba(255,255,255,.07);}
 .nav-link:focus-visible{outline:2px solid var(--blue-bright);outline-offset:2px;}
 .nav-cta{padding:11px 22px;}
+/* phones: collapse the section links, keep logo + Contact (links remain reachable by scrolling).
+   720px is just above where the full nav row would start to overflow. */
+@media (max-width:720px){
+  .nav-menu{background:none;border:0;padding:0;backdrop-filter:none;gap:0;}
+  .nav-menu .nav-link{display:none;}
+}
+@media (max-width:520px){
+  .wrap{padding:0 20px;}
+  .nav{padding-top:18px;padding-bottom:14px;}
+}
 
 /* ---------- hero ---------- */
 .hero{padding-top:34px;position:relative;z-index:1;}
