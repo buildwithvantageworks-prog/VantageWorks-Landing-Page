@@ -1,0 +1,2 @@
+#!/bin/sh
+exec "/Users/Owner/.local/node/bin/node" "$(dirname "$0")/serve.mjs" "$@"

@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# OS / cruft
+.DS_Store
+Landing Page
+
+# Sensitive business data — never commit
+*.xlsx
+
+# Internal working material / large reference captures (not part of the site)
+temporary screenshots/
+ref_slices/
+screencapture-*.png
+screencapture-*.pdf
+VantageWorks-Brand-Guidelines.png
+brand-summary.html
+Front-end Design Skill.md
