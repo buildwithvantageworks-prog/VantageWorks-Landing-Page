@@ -3,6 +3,14 @@
 ## Always Do First
 - **Invoke the `frontend-design` skill** before writing any frontend code, every session, no exceptions.
 
+## Deployment & Git Workflow
+- **Default loop: edit locally → test on `localhost:3000` → stop.** While iterating, all work stays local. Do NOT commit or push.
+- **Never `git commit` or `git push` unless the user explicitly says so** (e.g. "push it", "commit that", "sync to GitHub"). Asking-first is the rule, not the exception.
+- **How deploys happen:** pushing to the GitHub repo `main` is the deploy. The repo is connected to **Vercel**, which **auto-builds on every push to `main`** (~1–2 min). There is no separate deploy step and no manual Vercel action.
+- **Live site:** https://vantage-works-landing-page.vercel.app/ — this is the single canonical host. (GitHub Pages is intentionally disabled; do not re-enable it.)
+- So the full pipeline is: **local edits → (on explicit go-ahead) push to GitHub `main` → Vercel auto-deploys → live.**
+- No credentials are stored; each push needs a Personal Access Token the user provides.
+
 ## Reference Images
 - If a reference image is provided: match layout, spacing, typography, and color exactly. Swap in placeholder content (images via `https://placehold.co/`, generic copy). Do not improve or add to the design.
 - If no reference image: design from scratch with high craft (see guardrails below).
@@ -15,11 +23,12 @@
 - If the server is already running, do not start a second instance.
 
 ## Screenshot Workflow
-- Puppeteer is installed at `C:/Users/nateh/AppData/Local/Temp/puppeteer-test/`. Chrome cache is at `C:/Users/nateh/.cache/puppeteer/`.
-- **Always screenshot from localhost:** `node screenshot.mjs http://localhost:3000`
+- Runtime: Node 22 at `~/.local/node/bin/node` (also on PATH as `node`). `puppeteer-core` is in the project `node_modules/`; it drives the installed **Google Chrome** (auto-located at `/Applications/Google Chrome.app/...`; override with `CHROME_PATH`).
+- **Always screenshot from localhost:** `node screenshot.mjs http://localhost:3000` (or the wrapper `./screenshot http://localhost:3000`).
 - Screenshots are saved automatically to `./temporary screenshots/screenshot-N.png` (auto-incremented, never overwritten).
 - Optional label suffix: `node screenshot.mjs http://localhost:3000 label` → saves as `screenshot-N-label.png`
-- `screenshot.mjs` lives in the project root. Use it as-is.
+- `screenshot.mjs` lives in the project root. Use it as-is. It captures the **full page at 1440px wide @2x** and emulates `prefers-reduced-motion`.
+- **Desktop-width only:** the tool always renders at 1440px. To verify phone layout, capture with a narrow mobile viewport via a one-off script (e.g. width 390), then delete it — never commit throwaway scripts.
 - After screenshotting, read the PNG from `temporary screenshots/` with the Read tool — Claude can see and analyze the image directly.
 - When comparing, be specific: "heading is 32px but reference shows ~24px", "card gap is 16px but should be 24px"
 - Check: spacing/padding, font size/weight/line-height, colors (exact hex), alignment, border-radius, shadows, image sizing
